@@ -25,7 +25,7 @@ SeatRouter.get("/", async(req,res)=>{
 SeatRouter.post("/", async(req,res)=>{
     let num = +req.body.number
     try {
-        let batch,pos;
+        let val,pos;
         const seats = await SeatModel.find()
         for(let i = 0; i < seats.length / num; i++){
             let value;
@@ -38,10 +38,10 @@ SeatRouter.post("/", async(req,res)=>{
                 value=true
             }
             if (value) {
-                batch = i;
+                val = i;
                 break;
             }
-            pos = batch * num;
+            pos = val * num;
         }
         res.send({ "msg": "success", position: pos + 1 });
 
